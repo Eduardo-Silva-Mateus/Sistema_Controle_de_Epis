@@ -1,0 +1,21 @@
+﻿@model Controle_de_Epis.ViewModel.LoginViewModel
+
+<form asp-action="Login" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <label asp-for="Email"></label>
+    <input type="email" asp-for="Email"  class="form-control"/>
+    <span asp-validation-for="Email" class="text-danger"></span>
+
+    <label asp-for="Senha"></label>
+    <input type="password" asp-for="Senha" class="form-control" />
+    <span asp-validation-for="Senha" class="text-danger"></span>
+    <label>
+        <input type="checkbox" asp-for="LembrarMe" />
+        @Html.DisplayNameFor(m => m.LembrarMe)
+    </label>
+
+    <button type="submit">
+        Login
+    </button>
+
+</form>
