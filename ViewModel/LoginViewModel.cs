@@ -7,12 +7,12 @@ namespace Controle_de_Epis.ViewModel
         [Display(Name = "E-mail")]
         [Required(ErrorMessage = "O e-mail é obrigatório.")]
         [EmailAddress(ErrorMessage = "Informe um e-mail válido.")]
-        public string Email { get; set; } = string.Empty;
+        public required string Email { get; set; } = string.Empty;
 
         [Display(Name = "Senha")]
         [Required(ErrorMessage = "A senha é obrigatória.")]
         [DataType(DataType.Password)]
-        public string Senha { get; set; } = string.Empty;
+        public required string Senha { get; set; } = string.Empty;
 
         [Display(Name = "Lembrar-me")]
         public bool LembrarMe { get; set; }
