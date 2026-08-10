@@ -6,11 +6,11 @@ namespace Controle_de_Epis.ViewModel
     {
         [Required(ErrorMessage = "Email é obrigatório")]
         [EmailAddress]
-        public string Email { get; set; }
+        public  required string Email { get; set; }
 
         [Required(ErrorMessage = "Senha é obrigatória")]
         [DataType(DataType.Password)]
-        public string Senha { get; set; }
+        public  required string Senha { get; set; }
 
         public bool LembrarMe { get; set; }
          
