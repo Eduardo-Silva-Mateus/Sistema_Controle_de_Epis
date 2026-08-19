@@ -1,0 +1,13 @@
+﻿@model Controle_de_Epis.ViewModel.LoginViewModel
+@{
+}
+<form asp-action="Login" method="post">
+    <label>Email:</label>
+    <input type="email" asp-for="Email" />
+    <span asp-validation-for="Email"></span>
+    <label>Senha:</label>
+    <input type="password" asp-for="Senha" />
+    <span asp-validation-for="Senha"></span>
+    <input type="checkbox" asp-for="LembrarMe" /> Lembrar-me
+    <button type="submit">Login</button>
+</form>
