@@ -5,7 +5,7 @@ using Controle_de_Epis.Models.Identity;
 
 namespace Controle_de_Epis.Service
 {
-    public class UsuarioService : IUsuarioService
+    public class UsuarioService  : IUsuarioService
     {
 
         private readonly UserManager<ApplicationUser> _userManager;
@@ -17,7 +17,7 @@ namespace Controle_de_Epis.Service
             _roleManager = roleManager;
         }
 
-        public  async Task<List<UsuarioListViewModel>> GetAllUsuariosAsync()
+        public async Task<List<UsuarioListViewModel>> GetAllUsuariosAsync()
          {
             var usuarios = _userManager.Users.
                 OrderByDescending(u => u.Ativo)
@@ -41,7 +41,7 @@ namespace Controle_de_Epis.Service
             return lista;
         }
 
-        public async Task<UsuarioEditViewModel> GetUsuarioByIdAsync(string id)
+        public async Task<UsuarioEditViewModel> GetUsuarioByIdAsync(string id)   
         {
             var usuario = await _userManager.FindByIdAsync(id);
             
