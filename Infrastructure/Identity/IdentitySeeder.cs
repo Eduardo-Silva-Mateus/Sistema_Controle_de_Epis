@@ -1,5 +1,6 @@
 ﻿using Controle_de_Epis.Models.Identity;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Identity.Client;
 
 namespace Controle_de_Epis.Infrastructure.Identity
 {
@@ -40,34 +41,33 @@ namespace Controle_de_Epis.Infrastructure.Identity
                 }
                 else
                 {
-                    result.Errors.ToList().ForEach(e => Console.WriteLine($"Error creating admin user: {e.Description}"));
+                   result.Errors.ToList().ForEach(e => Console.WriteLine($"Error creating admin user: {e.Description}"));
+                }
+
+                // Seed default operador user
+                var operadorUser = await userManager.FindByEmailAsync("operador@controledeepi.com");
+
+                if (operadorUser == null)
+                {
+                    var operador = new ApplicationUser
+                    {
+                        UserName = "Operador",
+                        Email = "operador@controledeepi.com",
+                        Nome = "Operador",
+                        Ativo = true
+                    };
+                    IdentityResult resultOperador = await userManager.CreateAsync(operador, "Operador@123");
+
+                    if (resultOperador.Succeeded)
+                    {
+                        await userManager.AddToRoleAsync(operador, Roles.Operador);
+                    }
+                    else
+                    {
+                        resultOperador.Errors.ToList().ForEach(e => Console.WriteLine($"Error creating operador user: {e.Description}"));
+                    }
                 }
             }
-
-
-            var operadorUser = await userManager.FindByEmailAsync("operador@controledeepi.com");
-
-            if (operadorUser == null)
-            {
-                var operador = new ApplicationUser
-                {
-                    UserName = "Operador",
-                    Email = "operador@controledeepi.com",
-                    Nome = "Operador",
-                    Ativo = true
-                };
-                IdentityResult result = await userManager.CreateAsync(operador, "Operador@123");
-
-                if (result.Succeeded)
-                {
-                    await userManager.AddToRoleAsync(operador, Roles.Operador);
-                }
-                else
-                {
-                    result.Errors.ToList().ForEach(e => Console.WriteLine($"Error creating operador user: {e.Description}"));
-                }
-            }
-
         }
     }
 }

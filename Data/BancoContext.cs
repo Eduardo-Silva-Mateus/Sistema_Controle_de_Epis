@@ -20,6 +20,6 @@ namespace Controle_de_Epis.Data
         {
             base.OnModelCreating(modelBuilder);
         }
-
+        
     }
 }

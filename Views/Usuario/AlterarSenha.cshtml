@@ -1,0 +1,41 @@
+﻿@model Controle_de_Epis.ViewModel.UsuarioResetPasswordViewModel
+
+@{
+    ViewData["Title"] = "Alterar Senha";
+}
+
+<h1>Alterar Senha</h1>
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form asp-action="AlterarSenha" method="post">
+
+    <input asp-for="Id" type="hidden" />
+
+    <div>
+        <label asp-for="Senha">Nova senha:</label>
+        <input asp-for="Senha" class="form-control" />
+        <span asp-validation-for="Senha" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="ConfirmarSenha">Confirmar nova senha:</label>
+        <input asp-for="ConfirmarSenha" class="form-control" />
+        <span asp-validation-for="ConfirmarSenha" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Alterar Senha
+    </button>
+
+    <a asp-action="Index" class="btn btn-secondary">
+        Voltar
+    </a>
+
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

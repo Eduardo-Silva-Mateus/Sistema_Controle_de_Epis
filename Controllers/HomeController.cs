@@ -1,4 +1,3 @@
-using Controle_de_Epis.Infrastructure.Identity;
 using Controle_de_Epis.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

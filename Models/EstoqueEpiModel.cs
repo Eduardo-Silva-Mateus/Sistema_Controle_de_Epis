@@ -5,7 +5,7 @@ namespace Controle_de_Epis.Models
 {
     public class EstoqueEpiModel
     {
-        public int Id { get; set; }
+        public int Id {  get; set; }
         public TipoMovimentacao TipoMovimentacao { get; set; }
         public int Quantidade { get; set; }
         public DateTime DataMovimentacao { get; set; }

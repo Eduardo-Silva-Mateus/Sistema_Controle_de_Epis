@@ -1,0 +1,93 @@
+@using Controle_de_Epis.ViewModel
+
+@model List<UsuarioListViewModel>
+
+<h1>Listagem de Usuários</h1>
+
+<a asp-controller="Usuario"
+    asp-action="CriarUsuario"
+    class="btn btn-primary">
+    Criar Usuário
+</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Email</th>
+            <th scope="col">Perfil</th>
+            <th scope="col">Ativo</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if(Model != null && Model.Any())
+        {
+            foreach(UsuarioListViewModel usuario in Model)
+            {
+                <tr>
+                    <td>@usuario.Id</td>
+                    <td>@usuario.Nome</td>
+                    <td>@usuario.Email</td>
+                    <td>@usuario.Perfil</td>
+                    <td>@(usuario.Ativo ? "Sim" : "Não")</td>
+                    <td>
+                        <div>
+                            <a asp-controller="Usuario"
+                               asp-action="EditarUsuario"
+                               asp-route-id="@usuario.Id"
+                               class="btn btn-primary">
+                                Editar
+                            </a>
+                            <form asp-controller="Usuario"
+                                  asp-action="AlterarStatus"
+                                  method="post"
+                                  style="display:inline;">
+
+                                <input type="hidden" name="id" value="@usuario.Id" />
+
+                                @if (usuario.Ativo)
+                                {
+                                    <input type="hidden" name="novoStatus" value="false" />
+
+                                    <button type="submit" class="btn btn-warning">
+                                        Inativar
+                                    </button>
+                                }
+                                else
+                                {
+                                    <input type="hidden" name="novoStatus" value="true" />
+
+                                    <button type="submit" class="btn btn-success">
+                                        Ativar
+                                    </button>
+                                }
+                            </form>
+                            <form asp-controller="Usuario" 
+                                  asp-action="AlterarRole" 
+                                  method="post">
+                                <input type="hidden" name="id" value="@usuario.Id" />
+                                
+                                    @if(usuario.Perfil == Controle_de_Epis.Enums.PerfilUserEnum.Operador)
+                                    {
+                                        <input type="hidden" name="novoPerfil" value="Admin" />
+                                        <button type="submit" class="btn btn-info">
+                                            Tornar Admin
+                                         </button> 
+                                    }
+                                    else
+                                    {
+                                        <input type="hidden" name="novoPerfil" value="Operador" />
+                                        <button type="submit" class="btn btn-info">
+                                                Tornar Operador
+                                        </button>
+                                    }
+                                </form>
+                            <a class="btn btn-secondary" asp-controller="Usuario" asp-action="AlterarSenha" asp-route-id="@usuario.Id">Alterar Senha</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
