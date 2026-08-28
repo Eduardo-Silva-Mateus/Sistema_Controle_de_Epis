@@ -240,3 +240,6 @@ D:\Controle_de_Epis\Controle_de_Epis\Controle_de_Epis\obj\Debug\net10.0\refint\C
 D:\Controle_de_Epis\Controle_de_Epis\Controle_de_Epis\obj\Debug\net10.0\Controle_de_Epis.pdb
 D:\Controle_de_Epis\Controle_de_Epis\Controle_de_Epis\obj\Debug\net10.0\Controle_de_Epis.genruntimeconfig.cache
 D:\Controle_de_Epis\Controle_de_Epis\Controle_de_Epis\obj\Debug\net10.0\ref\Controle_de_Epis.dll
+C:\Users\EduardoSilva\source\repos\Eduardo-Silva-Mateus\Sistema_Controle_de_Epis\obj\Debug\net10.0\Controle_de_Epis.dll
+C:\Users\EduardoSilva\source\repos\Eduardo-Silva-Mateus\Sistema_Controle_de_Epis\obj\Debug\net10.0\refint\Controle_de_Epis.dll
+C:\Users\EduardoSilva\source\repos\Eduardo-Silva-Mateus\Sistema_Controle_de_Epis\obj\Debug\net10.0\Controle_de_Epis.pdb

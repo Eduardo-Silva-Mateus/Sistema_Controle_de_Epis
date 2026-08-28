@@ -59,7 +59,7 @@ namespace Controle_de_Epis.Controllers
         public async Task<IActionResult> EditarUsuario(string id)
         {
             var usuario = await _usuarioService.GetUsuarioByIdAsync(id);
-
+            
             return View(usuario);
         }
 

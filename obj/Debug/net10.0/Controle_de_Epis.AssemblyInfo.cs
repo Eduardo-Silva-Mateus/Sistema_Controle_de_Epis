@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Controle_de_Epis")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7c2d6be3702592b58d07a84f530375a2786e1f57")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+97291d9d120d71ca2aa6a50c8f2d9eb98f17e771")]
 [assembly: System.Reflection.AssemblyProductAttribute("Controle_de_Epis")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Controle_de_Epis")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
