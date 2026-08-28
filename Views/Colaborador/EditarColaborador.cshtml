@@ -1,0 +1,40 @@
+@model Controle_de_Epis.ViewModel.UsuarioEditViewModel
+
+@{
+    ViewData["Title"] = "Editar Colaborador";
+}
+
+<div asp-validation-summary="All" class="text-danger"></div>
+<h1>Editar Colaborador</h1>
+
+<form asp-action="EditarColaborador" method="post">
+
+    <input type="hidden" asp-for="Id" />
+    
+    <div>
+        <label asp-for="NomeColaborador">Nome:</label>
+        <input asp-for="NomeColaborador" class="form-control" />
+        <span asp-validation-for="NomeColaborador" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="CargoColaborador">Cargo:</label>
+        <input asp-for="CargoColaborador" class="form-control" />
+        <span asp-validation-for="CargoColaborador" class="text-danger"></span>
+    </div>
+
+     <div>
+      <label asp-for="SetorColaborador">Setor:</label>
+      <input asp-for="SetorColaborador" class="form-control" />
+      <span asp-validation-for="SetorColaborador" class="text-danger"></span>
+  </div>
+
+    <button type="submit">Salvar alterações</button>
+    <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

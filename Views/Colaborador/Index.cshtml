@@ -1,0 +1,74 @@
+@using Controle_de_Epis.ViewModel
+
+@model List<ListarColaboradorViewModel>
+
+<h1>Listagem de Colaboradores</h1>
+
+<a asp-controller="Colaborador"
+    asp-action="CriarColaborador"
+    class="btn btn-primary">
+    Criar Colaborador
+</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nome Colaborador</th>
+            <th scope="col">Cpf Colabordor</th>
+            <th scope="col">Cargo Colaborador</th>
+            <th scope="col">Setor Colaborador</th>
+            <th scope="col">Ativo</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if(Model != null && Model.Any())
+        {
+            foreach(ListarColaboradorViewModel usuario in Model)
+            {
+                <tr>
+                    <td>@colaborador.Id</td>
+                    <td>@colaborador.NomeColaborador</td>
+                    <td>@colaborador.CpfColaborador</td>
+                    <td>@colaborador.CargoColaborador</td>
+                    <td>@colaborador.SetorColaborador</td>
+                    <td>@(usuario.Ativo ? "Sim" : "Não")</td>
+                    <td>
+                        <div>
+                            <a asp-controller="Colaborador"
+                               asp-action="EditarColaborador"
+                               asp-route-id="@colaborador.Id"
+                               class="btn btn-primary">
+                                Colaborador
+                            </a>
+                            <form asp-controller="Colaborador"
+                                  asp-action="AlterarStatus"
+                                  method="post"
+                                  style="display:inline;">
+
+                                <input type="hidden" name="id" value="@colaborador.Id" />
+
+                                @if (colaborador.Ativo)
+                                {
+                                    <input type="hidden" name="novoStatus" value="false" />
+
+                                    <button type="submit" class="btn btn-warning">
+                                        Inativar
+                                    </button>
+                                }
+                                else
+                                {
+                                    <input type="hidden" name="novoStatus" value="true" />
+
+                                    <button type="submit" class="btn btn-success">
+                                        Ativar
+                                    </button>
+                                }
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
