@@ -1,11 +1,13 @@
-﻿using Controle_de_Epis.Service.Interfaces;
+﻿using Controle_de_Epis.Results;
+using Controle_de_Epis.Service;
+using Controle_de_Epis.Service.Interfaces;
 using Controle_de_Epis.ViewModel.Colaborador;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Controle_de_Epis.Controllers
 {
-    [Authorize(Roles = "Admin,Opeerador")]
+    [Authorize(Roles = "Admin,Operador")]
     public class ColaboradorController : Controller
     {
         private readonly IColaboradorService _icolaboradorservice;
@@ -17,8 +19,10 @@ namespace Controle_de_Epis.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var colaborador = await _icolaboradorservice.GetAllColaboradoresAsync);
-            return View(colaborador);
+            var colaboradores = await _icolaboradorservice
+                .GetAllColaboradoresAsync();
+
+            return View(colaboradores);
         }
 
         [HttpGet]
@@ -29,73 +33,82 @@ namespace Controle_de_Epis.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CriarColaborador(colaborador)
+        public async Task<IActionResult> CriarColaborador(
+            CriarColaboradorViewModel colaborador)
         {
-            if (!ModelState.IsValid) 
+            if (!ModelState.IsValid)
             {
                 return View(colaborador);
             }
 
-            var resultado = await _icolaboradorservice.CriarColaboradorAsync(colaborador);
-
-            if (resultado.Success)
-            {
-                return RedirectToAction(nameof(Index));
-            }
-
-            foreach(var erro in resultado.Errors)
-            {
-                ModelState.AddModelError(string.Empty, error.Decription);
-            }
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> EditarColaborador(EditarColaboradorViewModel colaborador)
-        {
-            var colaborador = await _icolaboradorservice.GetColaboradorByIdAsync(id);
-
-            return View(colaborador);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditarColaorador(EditarColaboradorViewModel colaborador) 
-        {
-            if (!ModelState.IsValid)
-            {
-                return Redirect(nameof(Index));
-            }
-
-            var resultado = await _icolaboradorservice.UpdateColaboradorAsync(colaborador);
+            var resultado = await _icolaboradorservice
+                .CriarColaboradorAsync(colaborador);
 
             if (resultado.Sucesso)
             {
                 return RedirectToAction(nameof(Index));
             }
 
-            foreach(var error in resultado.Errors)
+            ModelState.AddModelError(
+                string.Empty,
+                resultado.Erro ?? "Não foi possível cadastrar o colaborador.");
+
+            return View(colaborador);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditarColaborador(int id)
+        {
+            var resultado = await _icolaboradorservice
+                .GetColaboradorByIdAsync(id);
+
+            if (!resultado.Sucesso)
             {
-                ModelState.AddModelError(string.Empty, error.Descripcion);
+                TempData["Erro"] = resultado.Erro;
+                return RedirectToAction(nameof(Index));
             }
+
+            return View(resultado.Dados);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditarColaborador(
+            EditarColaboradorViewModel colaborador)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(colaborador);
+            }
+
+            var resultado = await _icolaboradorservice
+                .UpdateColaboradorAsync(colaborador);
+
+            if (resultado.Sucesso)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            ModelState.AddModelError(
+                string.Empty,
+                resultado.Erro ?? "Não foi possível atualizar o colaborador.");
 
             return View(colaborador);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AlterarStatus(bool alterarStatus)
+        public async Task<IActionResult> AlterarStatus(int id)
         {
-            var resultado = await _icolaboradorservice.AlterarStatusAsync(alterarStatus);
+            var resultado = await _icolaboradorservice
+                .AlterarStatusAsync(id);
 
-            if (!resultado)
+            if (!resultado.Sucesso)
             {
-                return RedirectToAction(nameof(Index));
+                TempData["Erro"] = resultado.Erro;
             }
 
             return RedirectToAction(nameof(Index));
         }
-
-
-
     }
 }
