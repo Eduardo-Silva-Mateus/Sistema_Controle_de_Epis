@@ -32,7 +32,7 @@
                     <td>@colaborador.CpfColaborador</td>
                     <td>@colaborador.CargoColaborador</td>
                     <td>@colaborador.SetorColaborador</td>
-                    <td>@(colaborador.AtivoColaborador ? "Sim" : "Não")</td>
+                    <td>@(colaborador.AtivoColaborador ? "Ativo" : "Inativo")</td>
                     <td>
                         <div>
                             <a asp-controller="Colaborador"
@@ -48,7 +48,7 @@
 
                                 <input type="hidden" name="id" value="@colaborador.Id" />
 
-                                @if (colaborador.Ativo)
+                                @if (colaborador.AtivoColaborador)
                                 {
                                     <input type="hidden" name="novoStatus" value="false" />
 

@@ -1,14 +1,13 @@
 using Controle_de_Epis.ViewModel;
 using Controle_de_Epis.Results;
+using Controle_de_Epis.ViewModel.TipoEpi;
 
 namespace Controle_de_Epis.Service.Interfaces
 {
     public interface ITipoEpiService
     {
-        Task<ResultError<ListarTipoEpiViewModel>> ListarTipoEpiAsync();
-        Task<ResltError<CriarTipoEpiViewModel>> CriarTipoEpiAsync(CriarTipoEpiViewModel tipoepi);
-        Task<ResultError<EditarTipoEpiViewModel>> EditarTipoEpiAsync(int id);
-        Task<ResultError<EditarTipoEpiViewMode>> UpdateTipoEpiAsync(EditarTipoEpiViewModel tipoepi)
-        Task<ResultErro<bool>> AlterarStatusAsync(int id);
+        Task<List<ListarTipoEpiViewModel>> ListarTipoEpisAsync();
+        Task<ResultError<CriarTipoEpiViewModel>> CriarTipoEpiAsync(CriarTipoEpiViewModel tipoEpi);
+        Task<ResultError<bool>> AlterarStatusTipoEpiAsync(int id, bool status);
     }
 }

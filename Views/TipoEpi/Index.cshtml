@@ -1,0 +1,91 @@
+﻿@using Controle_de_Epis.ViewModel.TipoEpi
+@model List<ListarTipoEpiViewModel>
+
+@{
+    ViewData["Title"] = "Listar Tipos de EPI";
+}
+
+<h1>Listagem de Tipos de EPI</h1>
+
+<a asp-controller="TipoEpi"
+    asp-action="CriarTipoEpi"
+    class="btn btn-primary">
+    Criar Tipo de EPI
+</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nome Tipo EPI</th>
+            <th scope="col">Vida Útil (dias)</th>
+            <th scope="col">Obrigatório CA</th>
+            <th scope="col">Ativo</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if(Model != null && Model.Any())
+        {
+            foreach(ListarTipoEpiViewModel tipoEpi in Model)
+            {
+                <tr>
+                    <td>@tipoEpi.id</td>
+                    <td>@tipoEpi.NomeTipoEpi</td>
+                    <td>@tipoEpi.VidaUtilTipoEpi</td>
+                    <td>@tipoEpi.ObrigatorioCA</td>
+                    <td>@(tipoEpi.StatusTipoEpi ? "Ativo" : "Inativo")</td>
+                    <td>
+                        <div>
+                            <form asp-controller="TipoEpi"
+                                   asp-action="ObrigatorioCA"
+                                    method="post"
+                                   style="display:inline;">
+
+                                <input type="hidden" name="id" value="@tipoEpi.Id" />
+                                @if (tipoEpi.ObrigatorioCA)
+                                {
+                                    <input type="hidden" name="novoStatus" value="false" />
+                                    <button type="submit" class="btn btn-warning">
+                                        Desmarcar Obrigatório CA
+                                    </button>
+                                }
+                                else
+                                {
+                                    <input type="hidden" name="novoStatus" value="true" />
+                                    <button type="submit" class="btn btn-success">
+                                        Marcar Obrigatório CA
+                                    </button>
+                                }
+                                )
+                            </form>
+                            <form asp-controller="TipoEpi"
+                                  asp-action="AlterarStatus"
+                                  method="post"
+                                  style="display:inline;">
+
+                                <input type="hidden" name="id" value="@tipoEpi.Id" />
+
+                                @if (tipoEpi.StatusTipoEpi)
+                                {
+                                    <input type="hidden" name="novoStatus" value="false" />
+
+                                    <button type="submit" class="btn btn-warning">
+                                        Inativar
+                                    </button>
+                                }
+                                else
+                                {
+                                    <input type="hidden" name="novoStatus" value="true" />
+
+                                    <button type="submit" class="btn btn-success">
+                                        Ativar
+                                    </button>
+                                }
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

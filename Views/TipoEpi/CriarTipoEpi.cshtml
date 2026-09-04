@@ -1,0 +1,46 @@
+﻿@model Controle_de_Epis.ViewModel.TipoEpi.CriarTipoEpiViewModel
+
+@{
+    ViewData["Title"] = "Criar Tipo de EPI";
+}
+
+<div asp-validation-summary="All" class="text-danger"></div>
+<h1>Criar Tipo de EPI</h1>
+
+<form asp-action="CriarTipoEpi" method="post">
+
+    <div>
+        <label asp-for="NomeTipoEpi">Nome:</label>
+        <input asp-for="NomeTipoEpi" class="form-control" />
+        <span asp-validation-for="NomeTipoEpi" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="VidaUtilTipoEpi">Vida Útil (em dias):</label>
+        <input asp-for="VidaUtilTipoEpi" class="form-control" />
+        <span asp-validation-for="VidaUtilTipoEpi" class="text-danger"></span>
+    </div>
+
+    <div class="form-check mb-3">
+        <input asp-for="ObrigatorioCA" class="form-check-input" />
+        <label asp-for="ObrigatorioCA" class="form-check-label">
+            Obrigatório CA
+        </label>
+    </div>
+
+    <div class="form-check mb-3">
+        <input asp-for="StatusTipoEpi" class="form-check-input" />
+        <label asp-for="StatusTipoEpi" class="form-check-label">
+            Tipo Epi ativo
+        </label>
+    </div>
+
+    <button type="submit">Criar Tipo de EPI</button>
+    <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

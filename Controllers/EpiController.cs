@@ -1,6 +1,4 @@
-﻿using Controle_de_Epis.Infrastructure.Identity;
-using Controle_de_Epis.AspNetCore.Mvc;
-using System.Diagnostics;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Controle_de_Epis.Controllers
 {
