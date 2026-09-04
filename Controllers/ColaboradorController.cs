@@ -33,8 +33,7 @@ namespace Controle_de_Epis.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CriarColaborador(
-            CriarColaboradorViewModel colaborador)
+        public async Task<IActionResult> CriarColaborador(CriarColaboradorViewModel colaborador)
         {
             if (!ModelState.IsValid)
             {
